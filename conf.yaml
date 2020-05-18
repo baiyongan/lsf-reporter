@@ -1,0 +1,46 @@
+---
+consul:
+  datacenter: "main"
+  address: "xxxxxx"
+  port: 8500
+  service:
+    name: "lsf-reporter"
+    service_id: "lsf-reporter"
+    address: "xxxxxx"  # 服务器IP
+    port: 8081
+    interval: "10s"
+    timeout: "30s"
+    deregister: "30s"
+  queue_kv: "lsf/queue"
+
+elasticsearch:
+  url: "xxxxxx"
+  index_name: "xxxxxx"
+
+storage:
+  directory:
+    root_dir: "hpc_bill_filling"  #账单文件存储的根路径
+    bill_dir: "lsf-acct-raw"  # 与 index 的名称一样
+    template_dir: "bill_template"
+  user_category:
+    admin: "administrator"
+    user: "common_user"
+  bill_type:
+    detailed: "detailed_user_bill_template.xlsx"
+    brief: "brief_admin_bill_template.xlsx"
+
+celery:
+  broker_url: "redis://xxxxxx/5"
+  backend_url: "redis://xxxxxx/2"
+  timezone: "Asia/Shanghai"
+
+log:
+  logger_name: 'lsf-reporter'
+  datefmt: '%Y-%m-%d %H:%M:%S'
+  format: '%(levelname)s %(asctime)s %(filename)s[line:%(lineno)d]>>> %(message)s'
+  log_file: 'logs/server.log'
+  out_level: 30 #NOTSET   = 0
+                #DEBUG    = 10
+                #INFO     = 20
+                #WARNING  = 30
+                #ERROR    = 40
